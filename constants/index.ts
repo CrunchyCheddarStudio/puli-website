@@ -8,7 +8,7 @@ export const SkillData = [
     height: 80,
   },
   {
-    name: "Poocoin",
+    name: "Poo coin",
     Image: "/poocoin.png",
     width: 80,
     height: 80,
