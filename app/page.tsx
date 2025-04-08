@@ -17,6 +17,14 @@ export default function Home() {
               A community-driven effort.
             </span>
           </h1>
+          
+          {/* Mobile-only text */}
+          <p className="text-gray-200 text-sm md:hidden">
+            The PULI token is 100% community-driven with no central authority. 
+            Join our mission to the moon where every member has a voice!
+          </p>
+          
+          {/* Desktop text (hidden on mobile) */}
           <p className="text-gray-200 text-sm md:text-base hidden md:block">
             The PULI token is a 100% community-driven cryptocurrency, 
             meaning there is no single entity in charge. 
@@ -25,8 +33,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Puli Character - Responsive Positioning */}
-      <div className="absolute bottom-0 right-0 z-[10]">
+      {/* Puli Character - Hidden on mobile, visible on md+ screens */}
+      <div className="absolute bottom-0 right-0 z-[10] hidden md:block">
         <Image
           src="/SpacePuli.png"
           alt="puli in space suit"
