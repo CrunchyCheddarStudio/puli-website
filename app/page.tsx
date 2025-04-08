@@ -50,29 +50,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Mobile Buttons - Bottom Right */}
-      <div className="absolute flex bottom-10 z-[20] right-5 md:hidden gap-3">
-        <Link
-          href="/info"
-          className="rounded-[20px] bg-blue-500 px-4 py-2 text-sm text-white max-w-[120px]"
-        >
-          Learn more
-        </Link>
-
-        <Link
-          href="/games"
-          className="rounded-[20px] bg-transparent border border-white px-4 py-2 text-sm text-white max-w-[120px]"
-        >
-          Our games
-        </Link>
-        <Link
-          href="/join"
-          className="rounded-[20px] bg-transparent border border-white px-4 py-2 text-sm text-white max-w-[120px]"
-        >
-          Join us
-        </Link>
-      </div>
-
       {/* Puli Character - Responsive Positioning */}
       <div className="absolute bottom-0 right-0 z-[10]">
         <Image
