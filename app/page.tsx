@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Home() {
   return (
@@ -23,30 +22,6 @@ export default function Home() {
             meaning there is no single entity in charge. 
             Instead, every decision regarding our mission to the moon is made collectively by the entire community.
           </p>
-          
-          {/* Desktop Buttons */}
-          <div className="flex-col md:flex-row hidden md:flex gap-5">
-            <Link
-              href="/info"
-              className="rounded-[20px] group relative bg-blue-500/40 hover:bg-blue-400/60 px-5 py-3 text-lg text-white max-w-[200px]"
-            >
-              Learn more
-            </Link>
-            <Link
-              href="/games"
-              className="rounded-[20px] group relative bg-transparent px-5 border border-white py-3 text-lg text-white max-w-[200px]"
-            >
-              <div className="absolute rounded-[20px] z-[1] bg-white inset-0 opacity-0 group-hover:opacity-20" />
-              Our games
-            </Link>
-            <Link
-              href="/join"
-              className="rounded-[20px] group relative bg-transparent border border-white px-5 py-3 text-lg text-white max-w-[200px]"
-            >
-              <div className="absolute rounded-[20px] z-[1] bg-white inset-0 opacity-0 group-hover:opacity-20" />
-              Join us
-            </Link>
-          </div>
         </div>
       </div>
 
