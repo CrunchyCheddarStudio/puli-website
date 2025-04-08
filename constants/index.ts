@@ -80,10 +80,12 @@ export const Socials = [
   {
     name: "Telegram",
     src: "/telegram.svg",
+    link: "https://t.me/PuliTokenOfficial"
   },
   {
     name: "Twitter",
     src: "/twitter.svg",
+    link: "https://x.com/PuliTokenBNB"
   },
 ];
 export const Projects = [
