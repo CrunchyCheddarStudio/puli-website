@@ -198,7 +198,7 @@ export default function Home() {
                   <h3 className="text-xl font-bold text-white mb-2">The Great Revival</h3>
                   <p className="text-gray-300 mb-4">After the original project ended, the community banded together to keep PULI alive.</p>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm text-purple-400">Since 2022</span>
+                    <span className="text-sm text-purple-400">Since 2024</span>
                     <a href="#" className="text-pink-400 hover:text-pink-300 text-sm font-semibold">Join Us →</a>
                   </div>
                 </div>
