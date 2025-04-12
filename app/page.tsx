@@ -17,17 +17,31 @@ export default function Home() {
 
   return (
     <div className="relative w-full bg-[#0a0a2a]">
-      {/* Fixed Background */}
+      {/* Fixed Background - Replaced stars.png with CSS stars */}
       <motion.div 
         className="fixed inset-0 z-0 bg-[#0a0a2a]"
         style={{
-          backgroundImage: "url(/stars.png)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
           y: backgroundY,
           opacity: 0.8
         }}
-      />
+      >
+        {/* CSS Starfield */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(100)].map((_, i) => (
+            <div 
+              key={i}
+              className="absolute bg-white rounded-full"
+              style={{
+                width: `${Math.random() * 3}px`,
+                height: `${Math.random() * 3}px`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                opacity: Math.random() * 0.8 + 0.2
+              }}
+            />
+          ))}
+        </div>
+      </motion.div>
 
       {/* Main Content */}
       <div ref={containerRef} className="relative z-10">
@@ -109,7 +123,7 @@ export default function Home() {
                 </motion.div>
               </motion.div>
 
-              {/* Puli Character */}
+              {/* Puli Character - Only image we're keeping from original */}
               <motion.div 
                 className="relative w-full max-w-xl"
                 style={{ y: puliY }}
@@ -142,7 +156,7 @@ export default function Home() {
             </motion.h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Puli Runner */}
+              {/* Puli Runner - Replaced image with CSS */}
               <motion.div 
                 className="bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-purple-400/50 transition-all"
                 initial={{ opacity: 0, y: 20 }}
@@ -150,13 +164,10 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="relative h-48 bg-gradient-to-br from-purple-900/30 to-pink-900/30">
-                  <Image 
-                    src="/puli-runner-preview.webp" 
-                    alt="Puli Runner Game" 
-                    fill
-                    className="object-cover"
-                  />
+                <div className="relative h-48 bg-gradient-to-br from-purple-900/30 to-pink-900/30 flex items-center justify-center">
+                  <div className="w-32 h-32 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">PULI RUNNER</span>
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 </div>
                 <div className="p-6">
@@ -169,7 +180,7 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              {/* Community Revival */}
+              {/* Community Revival - Replaced image with CSS */}
               <motion.div 
                 className="bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-purple-400/50 transition-all"
                 initial={{ opacity: 0, y: 20 }}
@@ -177,13 +188,10 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <div className="relative h-48 bg-gradient-to-br from-purple-900/30 to-pink-900/30">
-                  <Image 
-                    src="/community-preview.webp" 
-                    alt="Puli Community" 
-                    fill
-                    className="object-cover"
-                  />
+                <div className="relative h-48 bg-gradient-to-br from-purple-900/30 to-pink-900/30 flex items-center justify-center">
+                  <div className="w-32 h-32 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-xl text-center px-4">COMMUNITY POWER</span>
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 </div>
                 <div className="p-6">
@@ -196,7 +204,7 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              {/* Future Plans */}
+              {/* Future Plans - Replaced image with CSS */}
               <motion.div 
                 className="bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden border border-white/10 hover:border-purple-400/50 transition-all"
                 initial={{ opacity: 0, y: 20 }}
@@ -204,13 +212,10 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 viewport={{ once: true }}
               >
-                <div className="relative h-48 bg-gradient-to-br from-purple-900/30 to-pink-900/30">
-                  <Image 
-                    src="/future-preview.webp" 
-                    alt="Puli Future" 
-                    fill
-                    className="object-cover"
-                  />
+                <div className="relative h-48 bg-gradient-to-br from-purple-900/30 to-pink-900/30 flex items-center justify-center">
+                  <div className="w-32 h-32 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg rotate-45 flex items-center justify-center">
+                    <span className="text-white font-bold text-xl -rotate-45">PULI 2.0</span>
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                 </div>
                 <div className="p-6">
@@ -226,10 +231,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* CTA Section - Replaced grid.svg with CSS pattern */}
         <section className="relative py-20 bg-gradient-to-b from-[#0a0a2a] to-[#1a1a4a]">
           <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
+            <div className="absolute inset-0 opacity-10" style={{
+              backgroundImage: `linear-gradient(to right, #6b46c1 1px, transparent 1px), linear-gradient(to bottom, #6b46c1 1px, transparent 1px)`,
+              backgroundSize: '20px 20px'
+            }} />
             <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 to-transparent" />
           </div>
           <div className="container mx-auto px-6 md:px-12 lg:px-24 text-center">
@@ -275,18 +283,15 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Footer */}
+        {/* Footer - Replaced logo with text */}
         <footer className="relative bg-[#0a0a2a] py-12 border-t border-white/10">
           <div className="container mx-auto px-6 md:px-12 lg:px-24">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="mb-6 md:mb-0">
                 <div className="flex items-center gap-2">
-                  <Image 
-                    src="/puli-logo.png" 
-                    alt="PULI Logo" 
-                    width={40} 
-                    height={40} 
-                  />
+                  <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white font-bold">
+                    P
+                  </div>
                   <span className="text-xl font-bold text-white">PULI Token</span>
                 </div>
                 <p className="text-gray-400 mt-2">Community Powered Since 2021</p>
