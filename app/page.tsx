@@ -244,7 +244,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             Be part of the PULI revolution where every community member has a voice. 
-            Together we're building something extraordinary in the crypto space.
+            Together we&apos;re building something extraordinary in the crypto space.
           </motion.p>
           <motion.div
             className="flex flex-col sm:flex-row justify-center gap-4"
