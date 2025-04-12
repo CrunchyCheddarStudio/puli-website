@@ -294,7 +294,7 @@ export default function Home() {
                   </div>
                   <span className="text-xl font-bold text-white">PULI Token</span>
                 </div>
-                <p className="text-gray-400 mt-2">Community Powered Since 2021</p>
+                <p className="text-gray-400 mt-2">Community Powered Since 2024</p>
               </div>
               <div className="flex flex-wrap gap-6 justify-center">
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">Twitter</a>
