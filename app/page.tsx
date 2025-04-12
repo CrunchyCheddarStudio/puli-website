@@ -110,7 +110,7 @@ export default function Home() {
                   </div>
                   <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
                     <p className="text-sm text-gray-400">Games Launched</p>
-                    <p className="text-2xl font-bold text-pink-400">3+</p>
+                    <p className="text-2xl font-bold text-pink-400">2+</p>
                   </div>
                   <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
                     <p className="text-sm text-gray-400">Total Volume</p>
