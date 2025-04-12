@@ -7,7 +7,7 @@ import { FiArrowRight, FiUsers, FiGithub } from 'react-icons/fi';
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <div className="relative w-full bg-[#0a0a2a] overflow-x-hidden">
       {/* Animated Background */}
-      <motion.div 
+      <motion.div
         className="fixed inset-0 z-0"
         style={{
           y: backgroundY,
@@ -73,9 +73,9 @@ export default function Home() {
               <a href="#games" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Games</a>
               <a href="#community" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Community</a>
             </div>
-            <a 
-              href="https://exchange.pancakeswap.finance/" 
-              target="_blank" 
+            <a
+              href="https://exchange.pancakeswap.finance/"
+              target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white text-sm font-medium hover:opacity-90 transition-opacity"
             >
@@ -89,7 +89,7 @@ export default function Home() {
           <div className="container mx-auto px-6 md:px-12 lg:px-24 py-20">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
               {/* Text Content */}
-              <motion.div 
+              <motion.div
                 className="flex-1"
                 style={{ y: textY }}
                 initial={{ opacity: 0, x: -20 }}
@@ -114,7 +114,7 @@ export default function Home() {
                   <span className="text-white">By The People, For The People</span>
                 </h1>
 
-                <motion.p 
+                <motion.p
                   className="text-xl text-gray-300 mb-8 max-w-2xl leading-relaxed"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -123,7 +123,7 @@ export default function Home() {
                   A 100% community-driven cryptocurrency where every holder has a voice. No central team, no hidden agendas - just pure decentralized collaboration.
                 </motion.p>
 
-                <motion.div 
+                <motion.div
                   className="flex flex-col sm:flex-row gap-4 mb-12"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -148,7 +148,7 @@ export default function Home() {
                 </motion.div>
 
                 {/* Stats */}
-                <motion.div 
+                <motion.div
                   className="grid grid-cols-2 md:grid-cols-4 gap-4"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -174,7 +174,7 @@ export default function Home() {
               </motion.div>
 
               {/* Puli Character */}
-              <motion.div 
+              <motion.div
                 className="relative w-full max-w-xl"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -182,7 +182,11 @@ export default function Home() {
               >
                 <div className="relative aspect-square">
                   <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 to-pink-900/20 rounded-3xl backdrop-blur-sm border border-white/10 shadow-2xl flex items-center justify-center">
-                    <div className="text-8xl">🚀</div>
+                    <img
+                      src="/pulilogogradient.png"
+                      alt="PULI Logo"
+                      className="w-3/4 h-3/4 object-contain"
+                    />
                   </div>
                   <div className="absolute -inset-6 bg-purple-500/20 rounded-full blur-xl -z-10"></div>
                 </div>
@@ -213,7 +217,7 @@ export default function Home() {
             </motion.div>
 
             <div className="flex flex-col lg:flex-row gap-12 items-center">
-              <motion.div 
+              <motion.div
                 className="flex-1"
                 initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -253,7 +257,7 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="flex-1"
                 initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -365,8 +369,8 @@ export default function Home() {
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-white mb-3">{game.title}</h3>
                     <p className="text-gray-400 mb-5">{game.description}</p>
-                    <a 
-                      href={game.link} 
+                    <a
+                      href={game.link}
                       className="inline-flex items-center text-purple-400 hover:text-purple-300 font-medium"
                     >
                       Learn more
@@ -401,7 +405,7 @@ export default function Home() {
             </motion.div>
 
             <div className="flex flex-col lg:flex-row gap-12 items-center">
-              <motion.div 
+              <motion.div
                 className="flex-1"
                 initial={{ opacity: 0, x: -40 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -455,7 +459,7 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 className="flex-1 w-full"
                 initial={{ opacity: 0, x: 40 }}
                 whileInView={{ opacity: 1, x: 0 }}
