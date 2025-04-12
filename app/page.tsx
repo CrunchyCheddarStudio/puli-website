@@ -88,7 +88,7 @@ export default function Home() {
                     PULI 2.0
                   </span>
                   <br />
-                  <span className="text-white">The People's Crypto</span>
+                  <span className="text-white">Crypto For The People</span>
                 </h1>
 
                 <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl leading-relaxed">
@@ -282,7 +282,7 @@ export default function Home() {
               </h2>
               <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed">
                 Be part of the PULI revolution where every community member has a voice. 
-                Together we're building something extraordinary in the crypto space.
+                Together were building something extraordinary in the crypto space.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <motion.a
