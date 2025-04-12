@@ -105,7 +105,7 @@ export default function Home() {
                   transition={{ delay: 0.6 }}
                 >
                   <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
-                    <p className="text-sm text-gray-400">Community Members</p>
+                    <p className="text-sm text-gray-400">Community</p>
                     <p className="text-2xl font-bold text-purple-400">10K+</p>
                   </div>
                   <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
