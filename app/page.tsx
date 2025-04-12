@@ -5,124 +5,128 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Home() {
-  const ref = useRef(null);
+  const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: containerRef,
     offset: ["start start", "end start"]
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const puliY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const puliY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   return (
-    <main className="w-full relative">
+    <div className="relative w-full bg-[#0a0a2a]">
       {/* Fixed Background */}
       <motion.div 
-        className="fixed inset-0 z-0"
+        className="fixed inset-0 z-0 bg-[#0a0a2a]"
         style={{
           backgroundImage: "url(/stars.png)",
           backgroundSize: "cover",
-          y: backgroundY
+          backgroundPosition: "center",
+          y: backgroundY,
+          opacity: 0.8
         }}
       />
 
-      {/* Scrollable Content */}
-      <div ref={ref} className="relative z-10 pt-20">
+      {/* Main Content */}
+      <div ref={containerRef} className="relative z-10">
         {/* Hero Section */}
-        <div className="container mx-auto px-6 md:px-12 lg:px-24 py-20 md:py-32 min-h-screen flex items-center">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 w-full">
-            {/* Text Content */}
-            <motion.div 
-              className="flex-1"
-              style={{ y: textY }}
-            >
-              <motion.h1 
-                className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-                  PULI 2.0
-                </span>
-                <br />
-                <span className="text-white">Community Powered</span>
-              </motion.h1>
-
-              <motion.p 
-                className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-              >
-                The PULI token has risen from the ashes as a 100% community-driven cryptocurrency. 
-                No central authority, no hidden agendas - just a passionate community rebuilding 
-                the PULI ecosystem together.
-              </motion.p>
-
-              <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <motion.a
-                  href="#"
-                  className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-semibold text-center hover:opacity-90 transition-all"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Join Our Community
-                </motion.a>
-                <motion.a
-                  href="#"
-                  className="px-8 py-3 border-2 border-purple-500 rounded-full text-white font-semibold text-center hover:bg-purple-500/10 transition-all"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Buy $PULI
-                </motion.a>
-              </div>
-
-              {/* Stats */}
+        <section className="min-h-screen w-full flex items-center pt-20">
+          <div className="container mx-auto px-6 md:px-12 lg:px-24 py-20">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+              {/* Text Content */}
               <motion.div 
-                className="grid grid-cols-2 md:grid-cols-4 gap-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
+                className="flex-1"
+                style={{ y: textY }}
               >
-                <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
-                  <p className="text-sm text-gray-400">Community Members</p>
-                  <p className="text-2xl font-bold text-purple-400">10K+</p>
-                </div>
-                <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
-                  <p className="text-sm text-gray-400">Games Launched</p>
-                  <p className="text-2xl font-bold text-pink-400">3+</p>
-                </div>
-                <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
-                  <p className="text-sm text-gray-400">Total Volume</p>
-                  <p className="text-2xl font-bold text-purple-400">$5M+</p>
-                </div>
-                <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
-                  <p className="text-sm text-gray-400">Since</p>
-                  <p className="text-2xl font-bold text-pink-400">2021</p>
-                </div>
-              </motion.div>
-            </motion.div>
+                <motion.h1 
+                  className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+                    PULI 2.0
+                  </span>
+                  <br />
+                  <span className="text-white">Community Powered</span>
+                </motion.h1>
 
-            {/* Puli Character */}
-            <motion.div 
-              className="relative w-full max-w-xl"
-              style={{ y: puliY }}
-            >
-              <Image
-                src="/SpacePuli.png"
-                alt="Puli in space suit"
-                width={600}
-                height={600}
-                className="w-full h-auto z-20 relative"
-                priority
-              />
-              <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-3xl -z-10" />
-            </motion.div>
+                <motion.p 
+                  className="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3, duration: 0.8 }}
+                >
+                  The PULI token has risen from the ashes as a 100% community-driven cryptocurrency. 
+                  No central authority, no hidden agendas - just a passionate community rebuilding 
+                  the PULI ecosystem together.
+                </motion.p>
+
+                <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                  <motion.a
+                    href="#"
+                    className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-semibold text-center hover:opacity-90 transition-all"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Join Our Community
+                  </motion.a>
+                  <motion.a
+                    href="#"
+                    className="px-8 py-3 border-2 border-purple-500 rounded-full text-white font-semibold text-center hover:bg-purple-500/10 transition-all"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Buy $PULI
+                  </motion.a>
+                </div>
+
+                {/* Stats */}
+                <motion.div 
+                  className="grid grid-cols-2 md:grid-cols-4 gap-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
+                    <p className="text-sm text-gray-400">Community Members</p>
+                    <p className="text-2xl font-bold text-purple-400">10K+</p>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
+                    <p className="text-sm text-gray-400">Games Launched</p>
+                    <p className="text-2xl font-bold text-pink-400">3+</p>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
+                    <p className="text-sm text-gray-400">Total Volume</p>
+                    <p className="text-2xl font-bold text-purple-400">$5M+</p>
+                  </div>
+                  <div className="bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10">
+                    <p className="text-sm text-gray-400">Since</p>
+                    <p className="text-2xl font-bold text-pink-400">2021</p>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              {/* Puli Character */}
+              <motion.div 
+                className="relative w-full max-w-xl"
+                style={{ y: puliY }}
+              >
+                <Image
+                  src="/SpacePuli.png"
+                  alt="Puli in space suit"
+                  width={600}
+                  height={600}
+                  className="w-full h-auto z-20 relative"
+                  priority
+                />
+                <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-3xl -z-10" />
+              </motion.div>
+            </div>
           </div>
-        </div>
+        </section>
 
         {/* Game Showcase Section */}
         <section className="relative py-20 bg-gradient-to-b from-[#1a1a4a] to-[#0a0a2a]">
@@ -302,6 +306,6 @@ export default function Home() {
           </div>
         </footer>
       </div>
-    </main>
+    </div>
   );
 }
