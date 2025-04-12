@@ -614,7 +614,7 @@ export default function Home() {
                 Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">PULI Revolution</span> Today
               </h2>
               <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-10 leading-relaxed">
-                Whether you're a gamer, investor, or crypto enthusiast, there's a place for you in our community.
+                Whether youre a gamer, investor, or crypto enthusiast, theres a place for you in our community.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <button className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-3">
