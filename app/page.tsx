@@ -299,9 +299,6 @@ export default function Home() {
               <div className="flex flex-wrap gap-6 justify-center">
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">Twitter</a>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">Telegram</a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Discord</a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">GitHub</a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">Whitepaper</a>
               </div>
             </div>
             <div className="mt-12 pt-8 border-t border-white/10 text-center text-gray-500 text-sm">
