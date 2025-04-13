@@ -63,9 +63,11 @@ export default function Home() {
         <nav className="fixed w-full py-6 px-6 md:px-12 lg:px-24 z-50 backdrop-blur-md bg-[#0a0a2a]/80 border-b border-white/5">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold">
-                P
-              </div>
+              <img 
+                src="/pulilogogradient.png" 
+                alt="PULI Logo"
+                className="w-8 h-8 object-contain"
+              />
               <span className="text-xl font-bold text-white">PULI</span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
@@ -331,14 +333,14 @@ export default function Home() {
                   description: "An endless runner game where you collect PULI tokens while avoiding obstacles.",
                   status: "Live",
                   link: "#",
-                  icon: "🏃‍♂️"
+                  image: "/pulirunner.jpg"
                 },
                 {
                   title: "Puli Astro",
                   description: "Multi-platform space shooter game with PULI token rewards and power-ups.",
                   status: "Live",
                   link: "#",
-                  icon: "🚀"
+                  image: "/puliastro.webp"
                 }
               ].map((game, i) => (
                 <motion.div
@@ -352,10 +354,12 @@ export default function Home() {
                   onHoverStart={() => setHoveredCard(i)}
                   onHoverEnd={() => setHoveredCard(null)}
                 >
-                  <div className="relative h-64 bg-gradient-to-br from-purple-900/30 to-pink-900/30 flex items-center justify-center">
-                    <div className="text-6xl">
-                      {game.icon}
-                    </div>
+                  <div className="relative h-64 bg-gradient-to-br from-purple-900/30 to-pink-900/30 flex items-center justify-center overflow-hidden">
+                    <img 
+                      src={game.image} 
+                      alt={game.title}
+                      className="w-full h-full object-cover"
+                    />
                     {hoveredCard === i && (
                       <motion.div
                         className="absolute inset-0 bg-black/20"
@@ -543,9 +547,11 @@ export default function Home() {
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="mb-8 md:mb-0">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold">
-                    P
-                  </div>
+                  <img 
+                    src="/pulilogogradient.png" 
+                    alt="PULI Logo"
+                    className="w-10 h-10 object-contain"
+                  />
                   <span className="text-xl font-bold text-white">PULI Token</span>
                 </div>
                 <p className="text-gray-400 text-sm">
