@@ -2,11 +2,12 @@
 
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FiArrowRight, FiUsers } from 'react-icons/fi';
+import { FiArrowRight, FiUsers, FiX } from 'react-icons/fi';
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [videoPopup, setVideoPopup] = useState<{show: boolean, url: string}>({show: false, url: ''});
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -17,8 +18,39 @@ export default function Home() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
+  const openVideoPopup = (url: string) => {
+    setVideoPopup({show: true, url});
+  };
+
+  const closeVideoPopup = () => {
+    setVideoPopup({show: false, url: ''});
+  };
+
   return (
     <div className="relative w-full bg-[#0a0a2a] overflow-x-hidden">
+      {/* Video Popup */}
+      {videoPopup.show && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4">
+          <div className="relative w-full max-w-4xl">
+            <button 
+              onClick={closeVideoPopup}
+              className="absolute -top-10 right-0 text-white hover:text-pink-400 transition-colors"
+            >
+              <FiX size={24} />
+            </button>
+            <div className="aspect-w-16 aspect-h-9 w-full">
+              <iframe
+                src={`https://www.youtube.com/embed/${videoPopup.url.split('v=')[1]}`}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full min-h-[200px] md:min-h-[400px] rounded-lg"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Animated Background */}
       <motion.div
         className="fixed inset-0 z-0"
@@ -332,14 +364,14 @@ export default function Home() {
                   title: "Puli Runner",
                   description: "An endless runner game where you collect PULI tokens while avoiding obstacles.",
                   status: "Live",
-                  link: "#",
+                  videoUrl: "https://www.youtube.com/watch?v=26R7O-FgEFw",
                   image: "/pulirunner.jpg"
                 },
                 {
                   title: "Puli Astro",
                   description: "Multi-platform space shooter game with PULI token rewards and power-ups.",
                   status: "Live",
-                  link: "#",
+                  videoUrl: "https://www.youtube.com/watch?v=5Ig8mBhJ7ZA",
                   image: "/puliastro.webp"
                 }
               ].map((game, i) => (
@@ -375,13 +407,13 @@ export default function Home() {
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-white mb-3">{game.title}</h3>
                     <p className="text-gray-400 mb-5">{game.description}</p>
-                    <a
-                      href={game.link}
-                      className="inline-flex items-center text-purple-400 hover:text-purple-300 font-medium"
+                    <button
+                      onClick={() => openVideoPopup(game.videoUrl)}
+                      className="inline-flex items-center text-purple-400 hover:text-purple-300 font-medium cursor-pointer"
                     >
-                      Learn more
+                      Watch Trailer
                       <FiArrowRight className="ml-1" />
-                    </a>
+                    </button>
                   </div>
                 </motion.div>
               ))}
