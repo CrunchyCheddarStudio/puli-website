@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FiArrowRight, FiUsers, FiGithub } from 'react-icons/fi';
+import { FiArrowRight, FiUsers } from 'react-icons/fi';
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -330,13 +330,15 @@ export default function Home() {
                   title: "Puli Runner",
                   description: "An endless runner game where you collect PULI tokens while avoiding obstacles.",
                   status: "Live",
-                  link: "#"
+                  link: "#",
+                  icon: "🏃‍♂️"
                 },
                 {
-                  title: "Puli Lottery",
-                  description: "Community-run lottery system where you can win PULI prizes.",
+                  title: "Puli Astro",
+                  description: "Multi-platform space shooter game with PULI token rewards and power-ups.",
                   status: "Live",
-                  link: "#"
+                  link: "#",
+                  icon: "🚀"
                 }
               ].map((game, i) => (
                 <motion.div
@@ -352,7 +354,7 @@ export default function Home() {
                 >
                   <div className="relative h-64 bg-gradient-to-br from-purple-900/30 to-pink-900/30 flex items-center justify-center">
                     <div className="text-6xl">
-                      {i === 0 ? "🏃‍♂️" : "🎰"}
+                      {game.icon}
                     </div>
                     {hoveredCard === i && (
                       <motion.div
@@ -420,18 +422,6 @@ export default function Home() {
                         icon: <FiUsers className="text-purple-400" />,
                         title: "Telegram",
                         description: "Join our main community chat",
-                        link: "#"
-                      },
-                      {
-                        icon: <FiGithub className="text-pink-400" />,
-                        title: "GitHub",
-                        description: "Contribute to open-source projects",
-                        link: "#"
-                      },
-                      {
-                        icon: "💬",
-                        title: "Discord",
-                        description: "Chat with community members",
                         link: "#"
                       },
                       {
@@ -566,7 +556,6 @@ export default function Home() {
                 <a href="#about" className="text-gray-400 hover:text-white transition-colors">About</a>
                 <a href="#games" className="text-gray-400 hover:text-white transition-colors">Games</a>
                 <a href="#community" className="text-gray-400 hover:text-white transition-colors">Community</a>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors">GitHub</a>
               </div>
             </div>
             <div className="mt-12 pt-8 border-t border-white/10 text-center text-gray-500 text-sm">
