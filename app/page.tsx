@@ -108,7 +108,7 @@ export default function Home() {
               <a href="#community" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Community</a>
             </div>
             <a
-              href="https://exchange.pancakeswap.finance/"
+              href="https://pancakeswap.finance/swap?outputCurrency=0xaef0a177c8c329cbc8508292bb7e06c00786bbfc"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white text-sm font-medium hover:opacity-90 transition-opacity"
@@ -164,14 +164,14 @@ export default function Home() {
                   transition={{ delay: 0.7 }}
                 >
                   <a
-                    href="#community"
+                    href="https://t.me/PuliTokenOfficial"
                     className="px-8 py-3.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-3"
                   >
                     <span>Join Our Community</span>
                     <FiArrowRight />
                   </a>
                   <a
-                    href="https://exchange.pancakeswap.finance/"
+                    href="https://pancakeswap.finance/swap?outputCurrency=0xaef0a177c8c329cbc8508292bb7e06c00786bbfc"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-8 py-3.5 border border-white/10 rounded-full text-white font-semibold hover:bg-white/5 transition-colors flex items-center justify-center gap-3"
@@ -458,13 +458,13 @@ export default function Home() {
                         icon: <FiUsers className="text-purple-400" />,
                         title: "Telegram",
                         description: "Join our main community chat",
-                        link: "#"
+                        link: "https://t.me/PuliTokenOfficial"
                       },
                       {
                         icon: "🐦",
                         title: "Twitter",
                         description: "Follow for latest updates",
-                        link: "#"
+                        link: "https://x.com/PuliTokenBNB"
                       }
                     ].map((platform, i) => (
                       <a
@@ -553,14 +553,14 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <a
-                  href="#community"
+                  href="https://t.me/PuliTokenOfficial"
                   className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-3"
                 >
                   <span>Join Our Community</span>
                   <FiArrowRight />
                 </a>
                 <a
-                  href="https://exchange.pancakeswap.finance/"
+                  href="https://pancakeswap.finance/swap?outputCurrency=0xaef0a177c8c329cbc8508292bb7e06c00786bbfc"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-8 py-4 border border-white/10 rounded-full text-white font-semibold hover:bg-white/5 transition-colors flex items-center justify-center gap-3"
