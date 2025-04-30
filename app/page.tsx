@@ -5,15 +5,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { FiArrowRight, FiUsers, FiX, FiBarChart2, FiDollarSign } from 'react-icons/fi';
 import Head from 'next/head';
 
-// Type declaration for EverSwap widget
-declare global {
-  interface Window {
-    everswapWidget?: {
-      init: () => void;
-    };
-  }
-}
-
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -28,26 +19,6 @@ export default function Home() {
   // Subtle parallax effects
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-
-  // Load EverSwap script
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !window.everswapWidget) {
-      const script = document.createElement('script');
-      script.src = 'https://www.everrise.com/everswap/embed.js';
-      script.async = true;
-      script.onload = () => {
-        setScriptLoaded(true);
-        if (window.everswapWidget) {
-          window.everswapWidget.init();
-        }
-      };
-      document.body.appendChild(script);
-      
-      return () => {
-        document.body.removeChild(script);
-      };
-    }
-  }, []);
 
   const openVideoPopup = (url: string) => {
     setVideoPopup({ show: true, url });
@@ -688,59 +659,6 @@ export default function Home() {
                     </div>
                   </div>
                 </motion.div>
-              </div>
-            </div>
-          </section>
-
-          {/* Swap Section */}
-          <section id="swap" className="relative py-32 bg-gradient-to-b from-[#0a0a2a] to-[#1a1a4a]">
-            <div className="container mx-auto px-6 md:px-12 lg:px-24">
-              <motion.div
-                className="text-center mb-12"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true }}
-              >
-                <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wider text-purple-300 uppercase bg-purple-900/30 rounded-full mb-4">
-                  Buy PULI
-                </span>
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Easy Token Swap</span>
-                </h2>
-                <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-                  Buy PULI directly with multiple payment options
-                </p>
-              </motion.div>
-
-              <div className="flex justify-center">
-                <div
-                  id="everswap-container"
-                  className="w-full max-w-[500px] min-h-[500px] bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden"
-                  data-default-output="0xaef0a177c8c329cbc8508292bb7e06c00786bbfc"
-                  data-theme="dark"
-                  data-background="transparent"
-                >
-                  {!scriptLoaded && (
-                    <div className="flex items-center justify-center h-full">
-                      <div className="animate-pulse text-gray-400">
-                        Loading swap interface...
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <div className="text-center mt-8 text-gray-400">
-                <p>Alternatively, you can also buy on PancakeSwap</p>
-                <a
-                  href="https://pancakeswap.finance/swap?outputCurrency=0xaef0a177c8c329cbc8508292bb7e06c00786bbfc"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-4 px-6 py-2 border border-white/10 rounded-full text-white font-semibold hover:bg-white/5 transition-colors"
-                >
-                  Open PancakeSwap
-                </a>
               </div>
             </div>
           </section>
