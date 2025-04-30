@@ -2,14 +2,23 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FiArrowRight, FiUsers, FiX } from 'react-icons/fi';
+import { FiArrowRight, FiUsers, FiX, FiBarChart2, FiDollarSign } from 'react-icons/fi';
 import Head from 'next/head';
+
+// Type declaration for EverSwap widget
+declare global {
+  interface Window {
+    everswapWidget?: {
+      init: () => void;
+    };
+  }
+}
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [videoPopup, setVideoPopup] = useState<{ show: boolean, url: string }>({ show: false, url: '' });
-  const [everSwapLoaded, setEverSwapLoaded] = useState(false);
+  const [scriptLoaded, setScriptLoaded] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -20,17 +29,24 @@ export default function Home() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
+  // Load EverSwap script
   useEffect(() => {
-    // Load EverSwap script dynamically
-    const script = document.createElement('script');
-    script.src = 'https://www.everrise.com/everswap/embed.js';
-    script.defer = true;
-    script.onload = () => setEverSwapLoaded(true);
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-    };
+    if (typeof window !== 'undefined' && !window.everswapWidget) {
+      const script = document.createElement('script');
+      script.src = 'https://www.everrise.com/everswap/embed.js';
+      script.async = true;
+      script.onload = () => {
+        setScriptLoaded(true);
+        if (window.everswapWidget) {
+          window.everswapWidget.init();
+        }
+      };
+      document.body.appendChild(script);
+      
+      return () => {
+        document.body.removeChild(script);
+      };
+    }
   }, []);
 
   const openVideoPopup = (url: string) => {
@@ -40,6 +56,34 @@ export default function Home() {
   const closeVideoPopup = () => {
     setVideoPopup({ show: false, url: '' });
   };
+
+  // Chart data
+  const chartLinks = [
+    {
+      name: "Poocoin",
+      url: "https://poocoin.app/tokens/0xaef0a177c8c329cbc8508292bb7e06c00786bbfc",
+      icon: <FiBarChart2 className="text-yellow-400" />,
+      color: "from-yellow-500 to-yellow-600"
+    },
+    {
+      name: "Dextools",
+      url: "https://www.dextools.io/app/en/bnb/pair-explorer/0xaef0a177c8c329cbc8508292bb7e06c00786bbfc",
+      icon: <FiBarChart2 className="text-blue-400" />,
+      color: "from-blue-500 to-blue-600"
+    },
+    {
+      name: "CoinGecko",
+      url: "https://www.coingecko.com/en/coins/puli-inu",
+      icon: <FiDollarSign className="text-emerald-400" />,
+      color: "from-emerald-500 to-emerald-600"
+    },
+    {
+      name: "CoinMarketCap",
+      url: "https://coinmarketcap.com/currencies/puli-inu/",
+      icon: <FiDollarSign className="text-purple-400" />,
+      color: "from-purple-500 to-purple-600"
+    }
+  ];
 
   return (
     <>
@@ -171,6 +215,7 @@ export default function Home() {
                 <a href="#about" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">About</a>
                 <a href="#games" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Games</a>
                 <a href="#community" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Community</a>
+                <a href="#charts" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Charts</a>
                 <a href="#swap" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Buy PULI</a>
               </div>
               <a
@@ -229,6 +274,8 @@ export default function Home() {
                   >
                     <a
                       href="https://t.me/PuliTokenOfficial"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="px-8 py-3.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-3"
                     >
                       <span>Join Our Community</span>
@@ -485,8 +532,55 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Charts Section */}
+          <section id="charts" className="relative py-32 bg-gradient-to-b from-[#1a1a4a] to-[#0a0a2a]">
+            <div className="container mx-auto px-6 md:px-12 lg:px-24">
+              <motion.div
+                className="text-center mb-12"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wider text-purple-300 uppercase bg-purple-900/30 rounded-full mb-4">
+                  Market Data
+                </span>
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">PULI Token</span> Charts
+                </h2>
+                <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+                  Track PULI performance across different platforms
+                </p>
+              </motion.div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {chartLinks.map((chart, index) => (
+                  <motion.a
+                    key={index}
+                    href={chart.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`bg-gradient-to-br ${chart.color} rounded-xl p-6 border border-white/10 transition-all flex flex-col items-center shadow-lg hover:shadow-xl hover:scale-105`}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="w-14 h-14 flex items-center justify-center text-3xl mb-4 bg-white/10 rounded-full">
+                      {chart.icon}
+                    </div>
+                    <h3 className="text-xl font-semibold text-white mb-2 text-center">{chart.name}</h3>
+                    <div className="mt-2 px-4 py-1.5 text-xs font-medium bg-white/20 rounded-full text-white backdrop-blur-sm">
+                      View Chart
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* Community Section */}
-          <section id="community" className="relative py-32 bg-gradient-to-b from-[#1a1a4a] to-[#0a0a2a]">
+          <section id="community" className="relative py-32 bg-gradient-to-b from-[#0a0a2a] to-[#1a1a4a]">
             <div className="container mx-auto px-6 md:px-12 lg:px-24">
               <motion.div
                 className="text-center mb-20"
@@ -619,22 +713,22 @@ export default function Home() {
                 </p>
               </motion.div>
 
-              {/* EverSwap Widget */}
               <div className="flex justify-center">
                 <div
-                  className="everswap-widget rounded-xl overflow-hidden"
+                  id="everswap-container"
+                  className="w-full max-w-[500px] min-h-[500px] bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden"
                   data-default-output="0xaef0a177c8c329cbc8508292bb7e06c00786bbfc"
                   data-theme="dark"
                   data-background="transparent"
-                  style={{ 
-                    width: '100%', 
-                    maxWidth: '500px', 
-                    minHeight: '500px',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)'
-                  }}
-                ></div>
+                >
+                  {!scriptLoaded && (
+                    <div className="flex items-center justify-center h-full">
+                      <div className="animate-pulse text-gray-400">
+                        Loading swap interface...
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
 
               <div className="text-center mt-8 text-gray-400">
