@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FiArrowRight, FiUsers, FiX } from 'react-icons/fi';
 import Head from 'next/head';
@@ -8,7 +8,8 @@ import Head from 'next/head';
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const [videoPopup, setVideoPopup] = useState<{show: boolean, url: string}>({show: false, url: ''});
+  const [videoPopup, setVideoPopup] = useState<{ show: boolean, url: string }>({ show: false, url: '' });
+  const [everSwapLoaded, setEverSwapLoaded] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -19,12 +20,25 @@ export default function Home() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
+  useEffect(() => {
+    // Load EverSwap script dynamically
+    const script = document.createElement('script');
+    script.src = 'https://www.everrise.com/everswap/embed.js';
+    script.defer = true;
+    script.onload = () => setEverSwapLoaded(true);
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
   const openVideoPopup = (url: string) => {
-    setVideoPopup({show: true, url});
+    setVideoPopup({ show: true, url });
   };
 
   const closeVideoPopup = () => {
-    setVideoPopup({show: false, url: ''});
+    setVideoPopup({ show: false, url: '' });
   };
 
   return (
@@ -35,28 +49,28 @@ export default function Home() {
         <meta name="keywords" content="PULI, cryptocurrency, community token, blockchain gaming, Puli Runner, Puli Astro, decentralized finance" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#0a0a2a" />
-        
+
         {/* Favicon */}
         <link rel="icon" href="/pulilogogradient.png" />
         <link rel="apple-touch-icon" href="/pulilogogradient.png" />
-        
+
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://puli-website.vercel.app/" />
         <meta property="og:title" content="PULI Token | Community-Driven Cryptocurrency & Gaming Ecosystem" />
         <meta property="og:description" content="PULI is a 100% community-driven cryptocurrency with gaming integrations. Join our decentralized movement." />
         <meta property="og:image" content="https://puli-website.vercel.app/pulilogogradient.png" />
-        
+
         {/* Twitter */}
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://puli-website.vercel.app/" />
         <meta property="twitter:title" content="PULI Token | Community-Driven Cryptocurrency & Gaming Ecosystem" />
         <meta property="twitter:description" content="PULI is a 100% community-driven cryptocurrency with gaming integrations. Join our decentralized movement." />
         <meta property="twitter:image" content="https://puli-website.vercel.app/pulilogogradient.png" />
-        
+
         {/* Canonical URL */}
         <link rel="canonical" href="https://puli-website.vercel.app/" />
-        
+
         {/* Structured Data */}
         <script type="application/ld+json">
           {`
@@ -81,7 +95,7 @@ export default function Home() {
         {videoPopup.show && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4">
             <div className="relative w-full max-w-4xl">
-              <button 
+              <button
                 onClick={closeVideoPopup}
                 className="absolute -top-10 right-0 text-white hover:text-pink-400 transition-colors"
                 aria-label="Close video"
@@ -146,8 +160,8 @@ export default function Home() {
           <nav className="fixed w-full py-6 px-6 md:px-12 lg:px-24 z-50 backdrop-blur-md bg-[#0a0a2a]/80 border-b border-white/5">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-2">
-                <img 
-                  src="/pulilogogradient.png" 
+                <img
+                  src="/pulilogogradient.png"
                   alt="PULI Logo"
                   className="w-8 h-8 object-contain"
                 />
@@ -157,11 +171,10 @@ export default function Home() {
                 <a href="#about" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">About</a>
                 <a href="#games" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Games</a>
                 <a href="#community" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Community</a>
+                <a href="#swap" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Buy PULI</a>
               </div>
               <a
-                href="https://pancakeswap.finance/swap?outputCurrency=0xaef0a177c8c329cbc8508292bb7e06c00786bbfc"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#swap"
                 className="px-6 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white text-sm font-medium hover:opacity-90 transition-opacity"
               >
                 Buy $PULI
@@ -222,9 +235,7 @@ export default function Home() {
                       <FiArrowRight />
                     </a>
                     <a
-                      href="https://pancakeswap.finance/swap?outputCurrency=0xaef0a177c8c329cbc8508292bb7e06c00786bbfc"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href="#swap"
                       className="px-8 py-3.5 border border-white/10 rounded-full text-white font-semibold hover:bg-white/5 transition-colors flex items-center justify-center gap-3"
                     >
                       <span>Buy $PULI</span>
@@ -439,8 +450,8 @@ export default function Home() {
                     onHoverEnd={() => setHoveredCard(null)}
                   >
                     <div className="relative h-64 bg-gradient-to-br from-purple-900/30 to-pink-900/30 flex items-center justify-center overflow-hidden">
-                      <img 
-                        src={game.image} 
+                      <img
+                        src={game.image}
                         alt={game.title}
                         className="w-full h-full object-cover"
                         loading="lazy"
@@ -523,6 +534,8 @@ export default function Home() {
                         <a
                           key={i}
                           href={platform.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="bg-white/5 hover:bg-white/10 rounded-xl p-4 border border-white/10 transition-colors flex items-start gap-4"
                         >
                           <div className="text-2xl mt-1">
@@ -585,6 +598,59 @@ export default function Home() {
             </div>
           </section>
 
+          {/* Swap Section */}
+          <section id="swap" className="relative py-32 bg-gradient-to-b from-[#0a0a2a] to-[#1a1a4a]">
+            <div className="container mx-auto px-6 md:px-12 lg:px-24">
+              <motion.div
+                className="text-center mb-12"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                <span className="inline-block px-3 py-1 text-xs font-semibold tracking-wider text-purple-300 uppercase bg-purple-900/30 rounded-full mb-4">
+                  Buy PULI
+                </span>
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Easy Token Swap</span>
+                </h2>
+                <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+                  Buy PULI directly with multiple payment options
+                </p>
+              </motion.div>
+
+              {/* EverSwap Widget */}
+              <div className="flex justify-center">
+                <div
+                  className="everswap-widget rounded-xl overflow-hidden"
+                  data-default-output="0xaef0a177c8c329cbc8508292bb7e06c00786bbfc"
+                  data-theme="dark"
+                  data-background="transparent"
+                  style={{ 
+                    width: '100%', 
+                    maxWidth: '500px', 
+                    minHeight: '500px',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    backdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)'
+                  }}
+                ></div>
+              </div>
+
+              <div className="text-center mt-8 text-gray-400">
+                <p>Alternatively, you can also buy on PancakeSwap</p>
+                <a
+                  href="https://pancakeswap.finance/swap?outputCurrency=0xaef0a177c8c329cbc8508292bb7e06c00786bbfc"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block mt-4 px-6 py-2 border border-white/10 rounded-full text-white font-semibold hover:bg-white/5 transition-colors"
+                >
+                  Open PancakeSwap
+                </a>
+              </div>
+            </div>
+          </section>
+
           {/* CTA Section */}
           <section className="relative py-32 bg-[url('/grid-pattern.svg')] bg-[#0a0a2a] bg-opacity-80">
             <div className="container mx-auto px-6 md:px-12 lg:px-24 text-center">
@@ -607,15 +673,15 @@ export default function Home() {
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
                   <a
                     href="https://t.me/PuliTokenOfficial"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full text-white font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-3"
                   >
                     <span>Join Our Community</span>
                     <FiArrowRight />
                   </a>
                   <a
-                    href="https://pancakeswap.finance/swap?outputCurrency=0xaef0a177c8c329cbc8508292bb7e06c00786bbfc"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#swap"
                     className="px-8 py-4 border border-white/10 rounded-full text-white font-semibold hover:bg-white/5 transition-colors flex items-center justify-center gap-3"
                   >
                     <span>Buy $PULI</span>
@@ -632,8 +698,8 @@ export default function Home() {
               <div className="flex flex-col md:flex-row justify-between items-center">
                 <div className="mb-8 md:mb-0">
                   <div className="flex items-center gap-3 mb-4">
-                    <img 
-                      src="/pulilogogradient.png" 
+                    <img
+                      src="/pulilogogradient.png"
                       alt="PULI Logo"
                       className="w-10 h-10 object-contain"
                     />
@@ -647,6 +713,7 @@ export default function Home() {
                   <a href="#about" className="text-gray-400 hover:text-white transition-colors">About</a>
                   <a href="#games" className="text-gray-400 hover:text-white transition-colors">Games</a>
                   <a href="#community" className="text-gray-400 hover:text-white transition-colors">Community</a>
+                  <a href="#swap" className="text-gray-400 hover:text-white transition-colors">Buy PULI</a>
                 </div>
               </div>
               <div className="mt-12 pt-8 border-t border-white/10 text-center text-gray-500 text-sm">
