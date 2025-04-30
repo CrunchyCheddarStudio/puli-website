@@ -187,7 +187,6 @@ export default function Home() {
                 <a href="#games" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Games</a>
                 <a href="#community" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Community</a>
                 <a href="#charts" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Charts</a>
-                <a href="#swap" className="text-gray-400 hover:text-white transition-colors text-sm font-medium">Buy PULI</a>
               </div>
               <a
                 href="#swap"
